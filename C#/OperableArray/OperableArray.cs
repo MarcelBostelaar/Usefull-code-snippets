@@ -64,9 +64,22 @@ namespace OperableArray
         /// <typeparam name="U">The new form</typeparam>
         /// <param name="transform">A transformation function</param>
         /// <returns>New array with transformed values, with a transformed default.</returns>
-        public OperableArray<U> Transform<U>(Func<T,U> transform)
+        public OperableArray<U> Transform<U>(Func<T, U> transform)
         {
             return new OperableArray<U>(dict.ToDictionary(x => x.Key, x => transform(x.Value)), () => transform(_default()));
+        }
+        /// <summary>
+        /// Projects all values into a new form, in place. Also transforms the default.
+        /// </summary>
+        /// <typeparam name="U">The new form</typeparam>
+        /// <param name="transform">A transformation function</param>
+        public void TransformInPlace(Func<T, T> transform)
+        {
+            foreach (var key in dict.Keys)
+            {
+                dict[key] = transform(dict[key]);
+            }
+            _default = () => transform(_default());
         }
         /// <summary>
         /// Translates the entire array by a certain amount.
