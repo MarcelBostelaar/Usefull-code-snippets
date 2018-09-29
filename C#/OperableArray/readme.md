@@ -14,4 +14,6 @@ Operations in higher dimensions may be kind of cumbersome as equality functions 
 
 The default Func<> must always return a newly constructed value if you dont want weird shared state errors.
 
+Included are 3 helper functions to make building a new 2d, 3d or 4d array slightly less cumbersome.
+
 Use at your own risk.
